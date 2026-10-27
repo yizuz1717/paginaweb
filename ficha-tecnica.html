@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha Técnica | CUPRA México</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cupra-copper: #B87D4B;
+    --cupra-accent: #C89B5C;
+    --text-white: #FFFFFF;
+    --text-gray: #B8A594;
+    --font-main: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --warm-deep: #1A0E08;
+    --warm-terra: #3D1E0F;
+    --warm-amber: #4A2812;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-main);
+    background: linear-gradient(180deg, #120804 0%, #1A0E08 25%, #2A1108 55%, #1A0E08 85%, #0D0603 100%);
+    background-attachment: fixed;
+    color: var(--text-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    background: linear-gradient(180deg, rgba(26,14,8,0.96) 0%, rgba(42,17,8,0.92) 100%);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(200,130,60,0.35);
+  }
+  .nav-container {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 72px;
+  }
+  .logo { font-size: 24px; font-weight: 800; letter-spacing: 4px; color: var(--cupra-copper); text-transform: uppercase; }
+  .logo span { color: var(--text-white); }
+  nav ul { display: flex; list-style: none; gap: 32px; }
+  nav ul li a {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-white);
+    transition: color 0.3s; position: relative;
+  }
+  nav ul li a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--cupra-copper); transition: width 0.3s;
+  }
+  nav ul li a:hover, nav ul li a.active { color: var(--cupra-copper); }
+  nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+  .cta-btn {
+    background: linear-gradient(135deg, var(--cupra-copper) 0%, var(--cupra-accent) 100%);
+    color: var(--warm-deep); padding: 10px 24px; border: none;
+    font-weight: 700; font-size: 13px; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(200,130,60,0.25);
+  }
+  .cta-btn:hover { transform: scale(1.03); box-shadow: 0 6px 28px rgba(200,130,60,0.45); }
+  .menu-toggle { display: none; background: none; border: none; color: var(--text-white); font-size: 28px; cursor: pointer; }
+
+  /* ===== HERO PEQUEÑO ===== */
+  .ficha-hero {
+    padding: 140px 24px 40px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(200,130,60,0.18) 0%, transparent 65%),
+      linear-gradient(180deg, transparent 0%, rgba(61,30,15,0.4) 100%);
+    position: relative;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--text-gray);
+    margin-bottom: 24px; transition: color 0.3s, gap 0.3s;
+  }
+  .back-link:hover { color: var(--cupra-copper); gap: 14px; }
+  .ficha-hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900; letter-spacing: -1px;
+    text-transform: uppercase; margin-bottom: 12px;
+    background: linear-gradient(180deg, #FFF8F0 0%, #E0A670 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .ficha-hero p { color: var(--text-gray); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+  /* ===== TABS DE MODELOS ===== */
+  .model-tabs {
+    max-width: 1280px; margin: 0 auto;
+    padding: 24px 24px 0;
+    display: flex; gap: 8px; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .model-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 14px 28px;
+    background: rgba(26,14,8,0.6);
+    border: 1px solid rgba(200,130,60,0.25);
+    color: var(--text-gray);
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s;
+    font-family: inherit;
+  }
+  .tab-btn:hover { color: var(--cupra-copper); border-color: rgba(200,130,60,0.5); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--cupra-copper) 0%, var(--cupra-accent) 100%);
+    color: var(--warm-deep);
+    border-color: var(--cupra-copper);
+    box-shadow: 0 6px 24px rgba(200,130,60,0.35);
+  }
+
+  /* ===== CONTENIDO ===== */
+  .ficha-content { max-width: 1280px; margin: 0 auto; padding: 48px 24px 100px; }
+
+  .model-view { display: none; animation: fadeIn 0.5s ease; }
+  .model-view.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Layout superior: imagen + resumen */
+  .model-top {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  .model-hero-img {
+    aspect-ratio: 16/10;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(200,130,60,0.35);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(200,130,60,0.15);
+  }
+  .model-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .model-hero-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(26,14,8,0.7) 100%);
+  }
+  .model-hero-img .model-tag {
+    position: absolute; top: 24px; left: 24px;
+    background: rgba(26,14,8,0.85); backdrop-filter: blur(8px);
+    padding: 8px 16px; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cupra-copper);
+    border: 1px solid rgba(200,130,60,0.4);
+  }
+
+  .model-summary {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 32px;
+    background: linear-gradient(160deg, rgba(74,40,18,0.4) 0%, rgba(26,14,8,0.6) 100%);
+    border: 1px solid rgba(200,130,60,0.25);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+  }
+  .model-summary .price-tag {
+    font-size: 32px; font-weight: 900;
+    color: var(--cupra-copper);
+    text-shadow: 0 0 30px rgba(200,130,60,0.4);
+    line-height: 1;
+  }
+  .model-summary .price-tag small {
+    display: block; font-size: 13px; font-weight: 400;
+    color: var(--text-gray); letter-spacing: 1px;
+    text-transform: uppercase; margin-top: 6px;
+    text-shadow: none;
+  }
+  .model-summary h2 {
+    font-size: 26px; font-weight: 800;
+    text-transform: uppercase; margin: 20px 0 12px;
+  }
+  .model-summary p {
+    color: var(--text-gray); font-size: 14px;
+    line-height: 1.6; margin-bottom: 20px;
+  }
+  .quick-specs {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-top: 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(200,130,60,0.2);
+  }
+  .quick-specs .qs {
+    display: flex; flex-direction: column;
+  }
+  .quick-specs .qs .value {
+    font-size: 20px; font-weight: 800;
+    color: var(--cupra-copper);
+  }
+  .quick-specs .qs .label {
+    font-size: 11px; color: var(--text-gray);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* Bloques de especificaciones */
+  .specs-section-title {
+    font-size: 20px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--cupra-copper);
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(200,130,60,0.3);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .specs-section-title::before {
+    content: ''; width: 4px; height: 20px;
+    background: var(--cupra-copper);
+    box-shadow: 0 0 15px rgba(200,130,60,0.6);
+  }
+  .specs-section-title:first-child { margin-top: 0; }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: rgba(200,130,60,0.15);
+    border: 1px solid rgba(200,130,60,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .spec-item {
+    background: linear-gradient(160deg, rgba(42,17,8,0.9) 0%, rgba(26,14,8,0.9) 100%);
+    padding: 20px 22px;
+    display: flex; flex-direction: column; gap: 6px;
+    transition: background 0.3s;
+  }
+  .spec-item:hover { background: linear-gradient(160deg, rgba(74,40,18,0.9) 0%, rgba(42,17,8,0.9) 100%); }
+  .spec-item .spec-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-gray);
+  }
+  .spec-item .spec-value {
+    font-size: 18px; font-weight: 700;
+    color: var(--text-white);
+    line-height: 1.3;
+  }
+  .spec-item .spec-value small {
+    font-size: 12px; font-weight: 400;
+    color: var(--text-gray); display: block; margin-top: 2px;
+  }
+
+  /* Equipamiento */
+  .equipment-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    list-style: none;
+  }
+  .equipment-list li {
+    padding: 14px 18px;
+    background: rgba(42,17,8,0.5);
+    border: 1px solid rgba(200,130,60,0.15);
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.3s;
+  }
+  .equipment-list li:hover {
+    border-color: rgba(200,130,60,0.5);
+    background: rgba(74,40,18,0.5);
+    transform: translateX(4px);
+  }
+  .equipment-list li::before {
+    content: '◆'; color: var(--cupra-copper);
+    font-size: 10px; flex-shrink: 0;
+  }
+
+  /* CTA final */
+  .ficha-cta {
+    max-width: 1280px; margin: 0 auto;
+    padding: 60px 24px 100px;
+    text-align: center;
+  }
+  .ficha-cta-box {
+    padding: 48px 32px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(200,130,60,0.25) 0%, transparent 60%),
+      linear-gradient(160deg, rgba(74,40,18,0.6) 0%, rgba(26,14,8,0.8) 100%);
+    border: 1px solid rgba(200,130,60,0.35);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .ficha-cta h3 {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 900; text-transform: uppercase;
+    margin-bottom: 12px;
+    background: linear-gradient(180deg, #FFF8F0 0%, #E0A670 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .ficha-cta p { color: var(--text-gray); font-size: 15px; margin-bottom: 28px; }
+  .ficha-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-warm {
+    padding: 14px 36px; font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border: none; cursor: pointer; transition: all 0.3s;
+    font-family: inherit;
+  }
+  .btn-warm.primary {
+    background: linear-gradient(135deg, var(--cupra-copper), var(--cupra-accent));
+    color: var(--warm-deep);
+    box-shadow: 0 8px 30px rgba(200,130,60,0.4);
+  }
+  .btn-warm.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,130,60,0.6); }
+  .btn-warm.secondary {
+    background: transparent; color: var(--text-white);
+    border: 1px solid rgba(200,130,60,0.5);
+  }
+  .btn-warm.secondary:hover { border-color: var(--cupra-copper); color: var(--cupra-copper); background: rgba(200,130,60,0.08); }
+
+  /* Footer */
+  footer {
+    background: linear-gradient(180deg, #0D0603 0%, #1A0E08 100%);
+    padding: 64px 24px 32px;
+    border-top: 1px solid rgba(200,130,60,0.25);
+  }
+  .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 48px; }
+  .footer-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cupra-copper); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul li a { font-size: 14px; color: var(--text-gray); transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--cupra-copper); }
+  .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(200,130,60,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-bottom p { font-size: 12px; color: #8A7663; }
+  .social-links { display: flex; gap: 16px; }
+  .social-links a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(200,130,60,0.35); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-gray); transition: all 0.3s; }
+  .social-links a:hover { border-color: var(--cupra-copper); color: var(--cupra-copper); background: rgba(200,130,60,0.12); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .model-top { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 72px; left: 0; width: 100%; background: linear-gradient(180deg, rgba(26,14,8,0.98), rgba(42,17,8,0.98)); flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid rgba(200,130,60,0.35); }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .cta-btn { display: none; }
+    .ficha-hero { padding: 120px 20px 30px; }
+    .ficha-content { padding: 32px 20px 80px; }
+    .quick-specs { grid-template-columns: 1fr 1fr; }
+    .specs-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo">CUP<span>RA</span></a>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html#modelos">Modelos</a></li>
+        <li><a href="ficha-tecnica.html" class="active">Ficha técnica</a></li>
+        <li><a href="index.html#mundo">Mundo CUPRA</a></li>
+        <li><a href="index.html#electrico">Electrificación</a></li>
+        <li><a href="#">Configurador</a></li>
+      </ul>
+    </nav>
+    <button class="cta-btn">Cotiza ahora</button>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="ficha-hero">
+  <a href="index.html#modelos" class="back-link">← Volver a modelos</a>
+  <h1>Ficha Técnica</h1>
+  <p>Descubre todas las especificaciones de la gama CUPRA. Selecciona el modelo que quieres explorar.</p>
+</section>
+
+<!-- TABS -->
+<div class="model-tabs" id="modelTabs">
+  <button class="tab-btn" data-model="leon">CUPRA León</button>
+  <button class="tab-btn" data-model="formentor">CUPRA Formentor</button>
+  <button class="tab-btn" data-model="terramar">CUPRA Terramar</button>
+  <button class="tab-btn" data-model="tavascan">CUPRA Tavascan</button>
+</div>
+
+<!-- CONTENIDO -->
+<div class="ficha-content">
+
+  <!-- ===== LEÓN ===== -->
+  <div class="model-view" id="view-leon">
+    <div class="model-top">
+      <div class="model-hero-img">
+        <span class="model-tag">Hatchback deportivo</span>
+        <img src="cupra-leon.avif" alt="CUPRA León">
+      </div>
+      <div class="model-summary">
+        <div class="price-tag">$631,900 <small>MXN · Precio desde</small></div>
+        <h2>CUPRA León</h2>
+        <p>El hatchback que combina ADN deportivo con practicidad diaria. Un compacto con carácter, diseñado para quienes no renuncian a la emoción.</p>
+        <div class="quick-specs">
+          <div class="qs"><span class="value">190 HP</span><span class="label">Potencia</span></div>
+          <div class="qs"><span class="value">7.1 s</span><span class="label">0-100 km/h</span></div>
+          <div class="qs"><span class="value">233 km/h</span><span class="label">Vel. máxima</span></div>
+          <div class="qs"><span class="value">7.2 L</span><span class="label">Consumo /100km</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="specs-section-title">Rendimiento</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-value">2.0L TSI Turbo<small>4 cilindros en línea</small></span></div>
+      <div class="spec-item"><span class="spec-label">Potencia máxima</span><span class="spec-value">190 HP<small>@ 4,200 - 6,000 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Torque máximo</span><span class="spec-value">320 Nm<small>@ 1,500 - 4,100 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Transmisión</span><span class="spec-value">DSG 7 vel.<small>Doble embrague</small></span></div>
+      <div class="spec-item"><span class="spec-label">Tracción</span><span class="spec-value">Delantera<small>FWD</small></span></div>
+      <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">7.1 segundos</span></div>
+      <div class="spec-item"><span class="spec-label">Velocidad máxima</span><span class="spec-value">233 km/h</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Dimensiones y peso</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Largo</span><span class="spec-value">4,398 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Ancho</span><span class="spec-value">1,799 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Alto</span><span class="spec-value">1,460 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Distancia entre ejes</span><span class="spec-value">2,686 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Cajuela</span><span class="spec-value">380 L</span></div>
+      <div class="spec-item"><span class="spec-label">Peso en orden de marcha</span><span class="spec-value">1,398 kg</span></div>
+      <div class="spec-item"><span class="spec-label">Rines</span><span class="spec-value">18"<small>Aluminio deportivo</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Eficiencia</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Consumo combinado</span><span class="spec-value">7.2 L/100 km</span></div>
+      <div class="spec-item"><span class="spec-label">Emisiones CO₂</span><span class="spec-value">164 g/km</span></div>
+      <div class="spec-item"><span class="spec-label">Tanque de combustible</span><span class="spec-value">50 L</span></div>
+      <div class="spec-item"><span class="spec-label">Norma de emisiones</span><span class="spec-value">EURO 6</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Equipamiento destacado</h3>
+    <ul class="equipment-list">
+      <li>Cuadro digital Digital Cockpit 10.25"</li>
+      <li>Pantalla táctil central 10"</li>
+      <li>Apple CarPlay y Android Auto inalámbrico</li>
+      <li>Faros LED con firma CUPRA</li>
+      <li>Asientos deportivos en tela y piel</li>
+      <li>Volante multifunción forrado en piel</li>
+      <li>Climatizador automático bizona</li>
+      <li>Cámara trasera</li>
+      <li>Sensor de estacionamiento delantero y trasero</li>
+      <li>CUPRA Connect con servicios online</li>
+    </ul>
+  </div>
+
+  <!-- ===== FORMENTOR ===== -->
+  <div class="model-view" id="view-formentor">
+    <div class="model-top">
+      <div class="model-hero-img">
+        <span class="model-tag">Crossover deportivo</span>
+        <img src="Formentor.avif" alt="CUPRA Formentor">
+      </div>
+      <div class="model-summary">
+        <div class="price-tag">$705,900 <small>MXN · Precio desde</small></div>
+        <h2>CUPRA Formentor</h2>
+        <p>El crossover que lo inició todo. Un diseño escultural, tecnología híbrida disponible y un rendimiento que deja huella.</p>
+        <div class="quick-specs">
+          <div class="qs"><span class="value">190 HP</span><span class="label">Potencia</span></div>
+          <div class="qs"><span class="value">7.1 s</span><span class="label">0-100 km/h</span></div>
+          <div class="qs"><span class="value">220 km/h</span><span class="label">Vel. máxima</span></div>
+          <div class="qs"><span class="value">7.5 L</span><span class="label">Consumo /100km</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="specs-section-title">Rendimiento</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-value">2.0L TSI Turbo<small>4 cilindros en línea</small></span></div>
+      <div class="spec-item"><span class="spec-label">Potencia máxima</span><span class="spec-value">190 HP<small>@ 4,200 - 6,000 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Torque máximo</span><span class="spec-value">320 Nm<small>@ 1,500 - 4,100 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Transmisión</span><span class="spec-value">DSG 7 vel.<small>Doble embrague</small></span></div>
+      <div class="spec-item"><span class="spec-label">Tracción</span><span class="spec-value">Delantera<small>FWD</small></span></div>
+      <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">7.1 segundos</span></div>
+      <div class="spec-item"><span class="spec-label">Velocidad máxima</span><span class="spec-value">220 km/h</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Versión PHEV (Híbrida enchufable)</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Motor combinado</span><span class="spec-value">1.4L TSI + Eléctrico</span></div>
+      <div class="spec-item"><span class="spec-label">Potencia total</span><span class="spec-value">272 HP</span></div>
+      <div class="spec-item"><span class="spec-label">Torque total</span><span class="spec-value">400 Nm</span></div>
+      <div class="spec-item"><span class="spec-label">Batería</span><span class="spec-value">25.8 kWh</span></div>
+      <div class="spec-item"><span class="spec-label">Autonomía eléctrica</span><span class="spec-value">55 km</span></div>
+      <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">7.0 segundos</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Dimensiones y peso</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Largo</span><span class="spec-value">4,450 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Ancho</span><span class="spec-value">1,839 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Alto</span><span class="spec-value">1,520 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Distancia entre ejes</span><span class="spec-value">2,680 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Cajuela</span><span class="spec-value">420 L</span></div>
+      <div class="spec-item"><span class="spec-label">Peso en orden de marcha</span><span class="spec-value">1,450 kg</span></div>
+      <div class="spec-item"><span class="spec-label">Rines</span><span class="spec-value">18"<small>Aleación deportiva</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Eficiencia</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Consumo combinado</span><span class="spec-value">7.5 L/100 km</span></div>
+      <div class="spec-item"><span class="spec-label">Emisiones CO₂</span><span class="spec-value">170 g/km</span></div>
+      <div class="spec-item"><span class="spec-label">Tanque de combustible</span><span class="spec-value">55 L</span></div>
+      <div class="spec-item"><span class="spec-label">Norma de emisiones</span><span class="spec-value">EURO 6</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Equipamiento destacado</h3>
+    <ul class="equipment-list">
+      <li>Cuadro digital Digital Cockpit 10.25"</li>
+      <li>Pantalla central 12" con navegación</li>
+      <li>Sistema de sonido BeatsAudio®</li>
+      <li>Faros Matrix LED</li>
+      <li>Asientos deportivos tipo bucket</li>
+      <li>Techo panorámico</li>
+      <li>Ambient lighting de 30 colores</li>
+      <li>Cámara 360°</li>
+      <li>Asistente de mantenimiento de carril</li>
+      <li>Control de crucero adaptativo</li>
+    </ul>
+  </div>
+
+  <!-- ===== TERRAMAR ===== -->
+  <div class="model-view" id="view-terramar">
+    <div class="model-top">
+      <div class="model-hero-img">
+        <span class="model-tag">SUV deportivo</span>
+        <img src="cupra-terramar.avif" alt="CUPRA Terramar">
+      </div>
+      <div class="model-summary">
+        <div class="price-tag">$764,900 <small>MXN · Precio desde</small></div>
+        <h2>CUPRA Terramar</h2>
+        <p>La SUV que redefine la deportividad. Espacio, confort y tecnología con un diseño provocador que desafía lo convencional.</p>
+        <div class="quick-specs">
+          <div class="qs"><span class="value">204 HP</span><span class="label">Potencia</span></div>
+          <div class="qs"><span class="value">7.9 s</span><span class="label">0-100 km/h</span></div>
+          <div class="qs"><span class="value">220 km/h</span><span class="label">Vel. máxima</span></div>
+          <div class="qs"><span class="value">7.8 L</span><span class="label">Consumo /100km</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="specs-section-title">Rendimiento</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Motor</span><span class="spec-value">2.0L TSI Turbo<small>4 cilindros en línea</small></span></div>
+      <div class="spec-item"><span class="spec-label">Potencia máxima</span><span class="spec-value">204 HP<small>@ 4,500 - 6,000 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Torque máximo</span><span class="spec-value">320 Nm<small>@ 1,500 - 4,000 rpm</small></span></div>
+      <div class="spec-item"><span class="spec-label">Transmisión</span><span class="spec-value">DSG 7 vel.<small>Doble embrague</small></span></div>
+      <div class="spec-item"><span class="spec-label">Tracción</span><span class="spec-value">Delantera<small>FWD</small></span></div>
+      <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">7.9 segundos</span></div>
+      <div class="spec-item"><span class="spec-label">Velocidad máxima</span><span class="spec-value">220 km/h</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Dimensiones y peso</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Largo</span><span class="spec-value">4,519 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Ancho</span><span class="spec-value">1,863 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Alto</span><span class="spec-value">1,584 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Distancia entre ejes</span><span class="spec-value">2,681 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Cajuela</span><span class="spec-value">540 L</span></div>
+      <div class="spec-item"><span class="spec-label">Peso en orden de marcha</span><span class="spec-value">1,570 kg</span></div>
+      <div class="spec-item"><span class="spec-label">Rines</span><span class="spec-value">18"<small>Aleación deportiva</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Eficiencia</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Consumo combinado</span><span class="spec-value">7.8 L/100 km</span></div>
+      <div class="spec-item"><span class="spec-label">Emisiones CO₂</span><span class="spec-value">176 g/km</span></div>
+      <div class="spec-item"><span class="spec-label">Tanque de combustible</span><span class="spec-value">55 L</span></div>
+      <div class="spec-item"><span class="spec-label">Norma de emisiones</span><span class="spec-value">EURO 6</span></div>
+    </div>
+
+    <h3 class="specs-section-title">Equipamiento destacado</h3>
+    <ul class="equipment-list">
+      <li>Cuadro digital Digital Cockpit 10.25"</li>
+      <li>Pantalla central 12.9" con navegación</li>
+      <li>Faros Matrix LED con firma CUPRA</li>
+      <li>Techo panorámico</li>
+      <li>Asientos deportivos calefactables</li>
+      <li>Ambient lighting de 30 colores</li>
+      <li>Cámara 360°</li>
+      <li>Portón trasero eléctrico</li>
+      <li>Sistema de sonido premium</li>
+      <li>CUPRA Connect con servicios online</li>
+    </ul>
+  </div>
+
+  <!-- ===== TAVASCAN ===== -->
+  <div class="model-view" id="view-tavascan">
+    <div class="model-top">
+      <div class="model-hero-img">
+        <span class="model-tag">100% Eléctrico</span>
+        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1200&auto=format&fit=crop" alt="CUPRA Tavascan">
+      </div>
+      <div class="model-summary">
+        <div class="price-tag">Próximamente <small>100% eléctrico</small></div>
+        <h2>CUPRA Tavascan</h2>
+        <p>El futuro eléctrico de CUPRA. Un SUV coupé con hasta 340 HP, diseño escultural y una experiencia de conducción completamente nueva.</p>
+        <div class="quick-specs">
+          <div class="qs"><span class="value">340 HP</span><span class="label">Potencia máx.</span></div>
+          <div class="qs"><span class="value">5.6 s</span><span class="label">0-100 km/h</span></div>
+          <div class="qs"><span class="value">568 km</span><span class="label">Autonomía WLTP</span></div>
+          <div class="qs"><span class="value">28 min</span><span class="label">Carga 10-80%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="specs-section-title">Rendimiento</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Tipo de motor</span><span class="spec-value">Eléctrico<small>1 motor (RWD) o 2 motores (AWD)</small></span></div>
+      <div class="spec-item"><span class="spec-label">Potencia (RWD)</span><span class="spec-value">286 HP</span></div>
+      <div class="spec-item"><span class="spec-label">Potencia (AWD VZ)</span><span class="spec-value">340 HP</span></div>
+      <div class="spec-item"><span class="spec-label">Torque máximo</span><span class="spec-value">545 Nm</span></div>
+      <div class="spec-item"><span class="spec-label">Transmisión</span><span class="spec-value">Automática 1 vel.<small>Reductora</small></span></div>
+      <div class="spec-item"><span class="spec-label">Tracción</span><span class="spec-value">Trasera (RWD) / Total (AWD)</span></div>
+      <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">6.8 s (RWD) / 5.6 s (AWD)</span></div>
+      <div class="spec-item"><span class="spec-label">Velocidad máxima</span><span class="spec-value">180 km/h<small>Limitada electrónicamente</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Batería y carga</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Capacidad bruta</span><span class="spec-value">82 kWh</span></div>
+      <div class="spec-item"><span class="spec-label">Capacidad útil</span><span class="spec-value">77 kWh</span></div>
+      <div class="spec-item"><span class="spec-label">Autonomía WLTP</span><span class="spec-value">568 km</span></div>
+      <div class="spec-item"><span class="spec-label">Carga DC máx.</span><span class="spec-value">135 kW<small>10-80% en 28 min</small></span></div>
+      <div class="spec-item"><span class="spec-label">Carga AC máx.</span><span class="spec-value">11 kW<small>Carga completa en ~7.5 h</small></span></div>
+      <div class="spec-item"><span class="spec-label">Tipo de conector</span><span class="spec-value">CCS2<small>Combo estándar europeo</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Dimensiones y peso</h3>
+    <div class="specs-grid">
+      <div class="spec-item"><span class="spec-label">Largo</span><span class="spec-value">4,644 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Ancho</span><span class="spec-value">1,861 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Alto</span><span class="spec-value">1,597 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Distancia entre ejes</span><span class="spec-value">2,766 mm</span></div>
+      <div class="spec-item"><span class="spec-label">Cajuela</span><span class="spec-value">540 L</span></div>
+      <div class="spec-item"><span class="spec-label">Peso en orden de marcha</span><span class="spec-value">2,200 kg</span></div>
+      <div class="spec-item"><span class="spec-label">Rines</span><span class="spec-value">19" - 21"<small>Diseño aerodinámico</small></span></div>
+    </div>
+
+    <h3 class="specs-section-title">Equipamiento destacado</h3>
+    <ul class="equipment-list">
+      <li>Cuadro digital Digital Cockpit 10.25"</li>
+      <li>Pantalla central 15" con navegación</li>
+      <li>Sistema de sonido Sennheiser®</li>
+      <li>Head-up display de realidad aumentada</li>
+      <li>Faros Matrix LED con firma lumínica CUPRA</li>
+      <li>Techo panorámico</li>
+      <li>Asientos deportivos con masaje</li>
+      <li>Ambient lighting dinámico</li>
+      <li>Bomba de calor para mayor eficiencia</li>
+      <li>Carga bidireccional V2L</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="ficha-cta">
+  <div class="ficha-cta-box">
+    <h3>¿Listo para configurar tu CUPRA?</h3>
+    <p>Personaliza cada detalle de tu modelo ideal y solicita una cotización sin compromiso.</p>
+    <div class="ficha-cta-buttons">
+      <button class="btn-warm primary">Configurar mi CUPRA</button>
+      <a href="index.html#modelos" class="btn-warm secondary">Ver todos los modelos</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Modelos</h4><ul>
+      <li><a href="ficha-tecnica.html?modelo=leon">CUPRA León</a></li>
+      <li><a href="ficha-tecnica.html?modelo=formentor">CUPRA Formentor</a></li>
+      <li><a href="ficha-tecnica.html?modelo=terramar">CUPRA Terramar</a></li>
+      <li><a href="ficha-tecnica.html?modelo=tavascan">CUPRA Tavascan</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Universo CUPRA</h4><ul><li><a href="index.html#adn">Nuestra historia</a></li><li><a href="index.html#adn">Lenguaje de diseño</a></li><li><a href="index.html#mundo">Tribu CUPRA</a></li><li><a href="index.html#mundo">Noticias</a></li></ul></div>
+    <div class="footer-col"><h4>Servicios</h4><ul><li><a href="#">Configurador</a></li><li><a href="#">Concesionarios</a></li><li><a href="#">Cotiza tu CUPRA</a></li><li><a href="#">Accesibilidad</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="#">Atención a clientes</a></li><li><a href="#">Prensa</a></li><li><a href="#">Distribuidores</a></li><li><a href="#">Bolsa de trabajo</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CUPRA México. Volkswagen de México, S.A. de C.V. Todos los derechos reservados.</p>
+    <div class="social-links">
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="Instagram">ig</a>
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="TikTok">♪</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ==================== MENÚ MÓVIL ==================== */
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('open');
+  }
+
+  /* ==================== LÓGICA DE TABS ==================== */
+  const tabs = document.querySelectorAll('.tab-btn');
+  const views = document.querySelectorAll('.model-view');
+
+  function showModel(modelName) {
+    if (!modelName) modelName = 'leon';
+    // Ocultar todas las vistas
+    views.forEach(v => v.classList.remove('active'));
+    tabs.forEach(t => t.classList.remove('active'));
+
+    // Mostrar la seleccionada
+    const view = document.getElementById('view-' + modelName);
+    const tab = document.querySelector(`.tab-btn[data-model="${modelName}"]`);
+
+    if (view && tab) {
+      view.classList.add('active');
+      tab.classList.add('active');
+      // Scroll horizontal para que el tab activo quede visible
+      tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } else {
+      // Fallback al primero
+      document.getElementById('view-leon').classList.add('active');
+      document.querySelector('.tab-btn[data-model="leon"]').classList.add('active');
+    }
+  }
+
+  // Click en cada tab
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const model = tab.dataset.model;
+      // Actualiza URL sin recargar
+      history.replaceState(null, '', `?modelo=${model}`);
+      showModel(model);
+    });
+  });
+
+  // Lee el parámetro ?modelo= al cargar
+  const params = new URLSearchParams(window.location.search);
+  const initialModel = params.get('modelo');
+  showModel(initialModel);
+</script>
+
+</body>
+</html>

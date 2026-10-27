@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CUPRA México | Sitio Oficial</title>
+<style>
+  /* ===== RESET Y BASE ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cupra-copper: #B87D4B;
+    --cupra-dark: #0D0D0D;
+    --cupra-gray: #1A1A1A;
+    --cupra-light: #F5F5F5;
+    --cupra-accent: #C89B5C;
+    --text-white: #FFFFFF;
+    --text-gray: #A0A0A0;
+    --font-main: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-main);
+    background: var(--cupra-dark);
+    color: var(--text-white);
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    z-index: 1000;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,125,75,0.3);
+    transition: background 0.3s;
+  }
+  .nav-container {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 72px;
+  }
+  .logo {
+    font-size: 24px; font-weight: 800; letter-spacing: 4px;
+    color: var(--cupra-copper);
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--text-white); }
+  nav ul {
+    display: flex; list-style: none; gap: 32px;
+  }
+  nav ul li a {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-white);
+    transition: color 0.3s; position: relative;
+  }
+  nav ul li a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; background: var(--cupra-copper);
+    transition: width 0.3s;
+  }
+  nav ul li a:hover { color: var(--cupra-copper); }
+  nav ul li a:hover::after { width: 100%; }
+  .cta-btn {
+    background: var(--cupra-copper); color: var(--cupra-dark);
+    padding: 10px 24px; border-radius: 0; border: none;
+    font-weight: 700; font-size: 13px; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--cupra-accent); transform: scale(1.03); }
+  .menu-toggle {
+    display: none; background: none; border: none;
+    color: var(--text-white); font-size: 28px; cursor: pointer;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 50%, #0D0D0D 100%);
+    position: relative;
+    padding: 120px 24px 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 80%, rgba(184,125,75,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero h1 {
+    font-size: clamp(36px, 7vw, 80px);
+    font-weight: 900; letter-spacing: -1px;
+    line-height: 1.05; margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 .copper { color: var(--cupra-copper); }
+  .hero p {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--text-gray); max-width: 600px;
+    margin: 0 auto 40px; line-height: 1.6;
+  }
+  .hero-buttons {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 14px 36px; font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border: none; cursor: pointer; transition: all 0.3s;
+  }
+  .btn-primary {
+    background: var(--cupra-copper); color: var(--cupra-dark);
+  }
+  .btn-primary:hover { background: var(--cupra-accent); transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: var(--text-white);
+    border: 1px solid var(--text-white);
+  }
+  .btn-secondary:hover { border-color: var(--cupra-copper); color: var(--cupra-copper); }
+
+  /* ===== SECCIONES GENERALES ===== */
+  section { padding: 100px 24px; }
+  .section-title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800; text-transform: uppercase;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .section-subtitle {
+    color: var(--text-gray); font-size: 16px;
+    max-width: 600px; margin-bottom: 60px; line-height: 1.6;
+  }
+  .container { max-width: 1280px; margin: 0 auto; }
+
+  /* ===== MODELOS ===== */
+  .models-section { background: var(--cupra-gray); }
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .model-card {
+    background: var(--cupra-dark);
+    border: 1px solid rgba(184,125,75,0.2);
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .model-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--cupra-copper);
+    box-shadow: 0 20px 60px rgba(184,125,75,0.15);
+  }
+  .model-image {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, #1A1A1A, #2A2A2A);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px; color: var(--cupra-copper);
+    position: relative; overflow: hidden;
+  }
+  .model-image::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 60px;
+    background: linear-gradient(transparent, var(--cupra-dark));
+  }
+  .model-info { padding: 24px; }
+  .model-info h3 {
+    font-size: 22px; font-weight: 800;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .model-info .price {
+    font-size: 20px; font-weight: 700;
+    color: var(--cupra-copper); margin-bottom: 12px;
+  }
+  .model-info .price small {
+    font-size: 12px; color: var(--text-gray);
+    font-weight: 400; display: block; margin-top: 2px;
+  }
+  .model-info p {
+    font-size: 14px; color: var(--text-gray);
+    line-height: 1.5; margin-bottom: 20px;
+  }
+  .model-link {
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    color: var(--cupra-copper);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: gap 0.3s;
+  }
+  .model-link:hover { gap: 14px; }
+
+  /* ===== ADN / DISEÑO ===== */
+  .dna-section { background: var(--cupra-dark); }
+  .dna-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .dna-visual {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #1A1A1A 0%, #0D0D0D 100%);
+    border: 1px solid rgba(184,125,75,0.3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .dna-visual .triangle-group {
+    display: flex; gap: 8px;
+  }
+  .dna-visual .triangle {
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid var(--cupra-copper);
+    opacity: 0.8;
+  }
+  .dna-visual .triangle:nth-child(2) { opacity: 0.5; }
+  .dna-visual .triangle:nth-child(3) { opacity: 0.3; }
+  .dna-text h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .dna-text h2 .copper { color: var(--cupra-copper); }
+  .dna-text p {
+    color: var(--text-gray); font-size: 16px;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+  .dna-features {
+    list-style: none; margin-top: 24px;
+  }
+  .dna-features li {
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 15px; display: flex; align-items: center; gap: 12px;
+  }
+  .dna-features li::before {
+    content: '◆'; color: var(--cupra-copper); font-size: 10px;
+  }
+
+  /* ===== MUNDO CUPRA (CARRUSEL) ===== */
+  .mundo-section {
+    background: linear-gradient(180deg, #0D0D0D 0%, #1A1A1A 100%);
+    overflow: hidden;
+  }
+  .mundo-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 40px;
+  }
+  .carousel-wrapper {
+    position: relative;
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  
+  /* Estilos de las tarjetas convertidas en enlaces <a> */
+  .mundo-card {
+    display: block; /* Necesario para que <a> se comporte como bloque */
+    min-width: 280px;
+    height: 420px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .mundo-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    z-index: 2;
+  }
+  .mundo-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .mundo-card:hover img { transform: scale(1.1); }
+  .mundo-card-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    height: 60%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.95));
+    display: flex; align-items: flex-end;
+    padding: 24px;
+  }
+  .mundo-card-overlay h3 {
+    font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    line-height: 1.3;
+  }
+  
+  /* Botones del carrusel */
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(13,13,13,0.8); color: white;
+    border: 1px solid rgba(184,125,75,0.5);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10; font-size: 18px;
+    transition: all 0.3s;
+  }
+  .carousel-btn:hover {
+    background: var(--cupra-copper); color: var(--cupra-dark);
+    border-color: var(--cupra-copper);
+  }
+  .carousel-btn.prev { left: 10px; }
+  .carousel-btn.next { right: 10px; }
+
+  /* ===== ELECTRIFICACIÓN ===== */
+  .electric-section {
+    background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+    text-align: center;
+  }
+  .electric-section .container { max-width: 900px; }
+  .electric-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px; margin-top: 48px;
+  }
+  .stat {
+    padding: 32px 16px;
+    border: 1px solid rgba(184,125,75,0.25);
+    background: rgba(255,255,255,0.02);
+  }
+  .stat .number {
+    font-size: 42px; font-weight: 900;
+    color: var(--cupra-copper); display: block;
+  }
+  .stat .label {
+    font-size: 13px; color: var(--text-gray);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 8px; display: block;
+  }
+
+  /* ===== CTA FINAL ===== */
+  .final-cta {
+    background: var(--cupra-copper);
+    text-align: center; padding: 100px 24px;
+  }
+  .final-cta h2 {
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900; color: var(--cupra-dark);
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .final-cta p {
+    color: rgba(13,13,13,0.7); font-size: 18px;
+    margin-bottom: 32px;
+  }
+  .final-cta .btn-dark {
+    background: var(--cupra-dark); color: var(--text-white);
+    padding: 16px 48px; font-size: 14px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    border: none; cursor: pointer; transition: all 0.3s;
+  }
+  .final-cta .btn-dark:hover { background: #000; transform: translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #080808; padding: 64px 24px 32px;
+    border-top: 1px solid rgba(184,125,75,0.2);
+  }
+  .footer-grid {
+    max-width: 1280px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px; margin-bottom: 48px;
+  }
+  .footer-col h4 {
+    font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--cupra-copper); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul li a {
+    font-size: 14px; color: var(--text-gray);
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--cupra-copper); }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-bottom p {
+    font-size: 12px; color: var(--text-gray);
+  }
+  .social-links { display: flex; gap: 16px; }
+  .social-links a {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(184,125,75,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-gray);
+    transition: all 0.3s;
+  }
+  .social-links a:hover {
+    border-color: var(--cupra-copper);
+    color: var(--cupra-copper);
+    background: rgba(184,125,75,0.1);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .dna-grid { grid-template-columns: 1fr; gap: 40px; }
+    .dna-visual { max-width: 400px; margin: 0 auto; }
+  }
+  @media (max-width: 768px) {
+    nav ul {
+      display: none; position: absolute;
+      top: 72px; left: 0; width: 100%;
+      background: rgba(13,13,13,0.98);
+      flex-direction: column; padding: 24px;
+      gap: 20px; border-bottom: 1px solid rgba(184,125,75,0.3);
+    }
+    nav ul.open { display: flex; }
+    .menu-toggle { display: block; }
+    .cta-btn { display: none; }
+    .hero { min-height: 90vh; }
+    section { padding: 72px 20px; }
+    .carousel-btn { display: none; }
+    .mundo-card { min-width: 240px; height: 360px; }
+    .mundo-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+  @media (max-width: 480px) {
+    .models-grid { grid-template-columns: 1fr; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
+    .mundo-card { min-width: 85vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <div class="nav-container">
+    <div class="logo">CUP<span>RA</span></div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#modelos">Modelos</a></li>
+        <li><a href="#adn">Universo CUPRA</a></li>
+        <li><a href="#mundo">Mundo CUPRA</a></li>
+        <li><a href="#electrico">Electrificación</a></li>
+        <li><a href="#">Configurador</a></li>
+      </ul>
+    </nav>
+    <button class="cta-btn">Cotiza ahora</button>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>El impulso<br>de <span class="copper">sentir</span></h1>
+    <p>Descubre la nueva generación de vehículos CUPRA. Diseño disruptivo, rendimiento deportivo y tecnología de vanguardia, creados para quienes no siguen el camino, sino que lo trazan.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Explorar modelos</button>
+      <button class="btn-secondary">Configurar mi CUPRA</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODELOS ==================== -->
+<section class="models-section" id="modelos">
+  <div class="container">
+    <h2 class="section-title">La <span style="color:var(--cupra-copper)">gama</span></h2>
+    <p class="section-subtitle">Cada modelo CUPRA es una declaración de intenciones. Elige el que mejor se adapte a tu estilo de vida.</p>
+
+    <div class="models-grid">
+      <div class="model-card">
+        <div class="model-image"><a href="ficha-tecnica.html"><img src="cupra-leon.avif" alt="CUPRA León"></a></div>
+        <div class="model-info">
+          <h3>CUPRA León</h3>
+          <div class="price">$631,900 <small>MXN · Desde</small></div>
+          <p>El hatchback deportivo que combina emoción y practicidad. Motor 2.0L TSI con 190 HP.</p>
+          <a href="ficha-tecnica.html" class="model-link">Descubrir →</a>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-image"><a href="ficha-tecnica.html"><img src="Formentor.avif" alt="CUPRA Formentor"></a></div>
+        <div class="model-info">
+          <h3>CUPRA Formentor</h3>
+          <div class="price">$705,900 <small>MXN · Desde</small></div>
+          <p>El crossover que lo inició todo. Diseño audaz, tecnología híbrida disponible y ADN deportivo.</p>
+          <a href="ficha-tecnica.html" class="model-link">Descubrir →</a>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-image" ><a href="ficha-tecnica.html"><img src="cupra-terramar.avif" alt="CUPRA Terramar"></a></div>
+        <div class="model-info">
+          <h3>CUPRA Terramar</h3>
+          <div class="price">$764,900 <small>MXN · Desde</small></div>
+          <p>La SUV que redefine la deportividad con espacio, confort y un diseño provocador.</p>
+          <a href="ficha-tecnica.html" class="model-link">Descubrir →</a>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-image">⚡</div>
+        <div class="model-info">
+          <h3>CUPRA Tavascan</h3>
+          <div class="price">Próximamente <small>100% eléctrico</small></div>
+          <p>El futuro eléctrico de CUPRA. Un SUV coupé con hasta 340 HP y diseño escultural.</p>
+          <a href="ficha-tecnica.html" class="model-link">Descubrir →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADN / DISEÑO ==================== -->
+<section class="dna-section" id="adn">
+  <div class="container">
+    <div class="dna-grid">
+      <div class="dna-visual"><img src="trail.avif">
+        <div class="triangle-group">
+        </div>
+      </div>
+      <div class="dna-text">
+        <h2>Un nuevo<br><span class="copper">lenguaje de diseño</span></h2>
+        <p>Disruptivo, emocional y expresivo. El ADN de CUPRA se materializa en cada línea, en cada curva, en cada detalle.</p>
+        <ul class="dna-features">
+          <li>Firma lumínica de tres triángulos</li>
+          <li>Capó escultural en forma de V</li>
+          <li>Logotipo CUPRA iluminado</li>
+          <li>Iluminación trasera coast-to-coast</li>
+          <li>Materiales sostenibles y reciclados</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MUNDO CUPRA (CARRUSEL CON ENLACES) ==================== -->
+<section class="mundo-section" id="mundo">
+  <div class="container">
+    <div class="mundo-header">
+      <h2 class="section-title" style="margin-bottom:0;">MUNDO <span style="color:var(--cupra-copper)">CUPRA</span></h2>
+    </div>
+    
+    <div class="carousel-wrapper" id="carouselWrapper">
+      <button class="carousel-btn prev" onclick="scrollCarousel(-1)">❮</button>
+      
+      <div class="carousel-track" id="carouselTrack">
+        
+        <!-- Tarjeta 1: Enlace a página de City Garage -->
+        <a href="#pagina-city-garage" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="CUPRA City Garage">
+          <div class="mundo-card-overlay">
+            <h3>CUPRA CITY GARAGE MÉXICO</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta 2: Enlace a página de Pádel -->
+        <a href="#pagina-padel-2026" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=800&auto=format&fit=crop" alt="CUPRA X PÁDEL 2026">
+          <div class="mundo-card-overlay">
+            <h3>CUPRA X PÁDEL 2026</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta 3: Enlace a Noticias -->
+        <a href="#pagina-noticias" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop" alt="CUPRA Noticias y Eventos">
+          <div class="mundo-card-overlay">
+            <h3>CUPRA NOTICIAS Y EVENTOS</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta 4: Enlace a Pádel Gamechangers -->
+        <a href="#pagina-gamechangers" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=800&auto=format&fit=crop" alt="Pádel Gamechangers">
+          <div class="mundo-card-overlay">
+            <h3>PÁDEL GAMECHANGERS</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta 5: Enlace a CUPRA Experience -->
+        <a href="#pagina-experience" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" alt="CUPRA Experience">
+          <div class="mundo-card-overlay">
+            <h3>CUPRA EXPERIENCE</h3>
+          </div>
+        </a>
+
+        <!-- Tarjeta 6: Enlace a Garage -->
+        <a href="#pagina-garage" class="mundo-card">
+          <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&auto=format&fit=crop" alt="CUPRA Garage">
+          <div class="mundo-card-overlay">
+            <h3>GARAGE</h3>
+          </div>
+        </a>
+
+      </div>
+      
+      <button class="carousel-btn next" onclick="scrollCarousel(1)">❯</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ELECTRIFICACIÓN ==================== -->
+<section class="electric-section" id="electrico">
+  <div class="container">
+    <h2 class="section-title">Hacia la <span style="color:var(--cupra-copper)">electrificación</span></h2>
+    <p class="section-subtitle" style="margin-left:auto;margin-right:auto;">CUPRA avanza con paso firme hacia un futuro más sostenible sin renunciar a la emoción al volante.</p>
+    <div class="electric-stats">
+      <div class="stat">
+        <span class="number">272</span>
+        <span class="label">HP · Formentor PHEV</span>
+      </div>
+      <div class="stat">
+        <span class="number">119</span>
+        <span class="label">km · Autonomía eléctrica</span>
+      </div>
+      <div class="stat">
+        <span class="number">25.8</span>
+        <span class="label">kWh · Batería</span>
+      </div>
+      <div class="stat">
+        <span class="number">7.7</span>
+        <span class="label">kW · Carga máxima</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA FINAL ==================== -->
+<section class="final-cta">
+  <h2>¿Listo para sentir<br>la obsesión CUPRA?</h2>
+  <p>Configura tu vehículo ideal y descubre por qué somos la marca que desafía lo establecido.</p>
+  <button class="btn-dark">Configurar mi CUPRA</button>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Modelos</h4>
+      <ul>
+        <li><a href="#">CUPRA León</a></li>
+        <li><a href="#">CUPRA Formentor</a></li>
+        <li><a href="#">CUPRA Terramar</a></li>
+        <li><a href="#">CUPRA Tavascan</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Universo CUPRA</h4>
+      <ul>
+        <li><a href="#">Nuestra historia</a></li>
+        <li><a href="#">Lenguaje de diseño</a></li>
+        <li><a href="#">Tribu CUPRA</a></li>
+        <li><a href="#">Noticias</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#">Configurador</a></li>
+        <li><a href="#">Concesionarios</a></li>
+        <li><a href="#">Cotiza tu CUPRA</a></li>
+        <li><a href="#">Accesibilidad</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">Atención a clientes</a></li>
+        <li><a href="#">Prensa</a></li>
+        <li><a href="#">Distribuidores</a></li>
+        <li><a href="#">Bolsa de trabajo</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CUPRA México. Volkswagen de México, S.A. de C.V. Todos los derechos reservados.</p>
+    <div class="social-links">
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="Instagram">ig</a>
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="TikTok">♪</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+  // --- MENÚ MÓVIL ---
+  function toggleMenu() {
+    const menu = document.getElementById('navMenu');
+    menu.classList.toggle('open');
+  }
+
+  document.querySelectorAll('#navMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navMenu').classList.remove('open');
+    });
+  });
+
+  // --- HEADER SCROLL ---
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
+    } else {
+      header.style.boxShadow = 'none';
+    }
+  });
+
+  // --- CARRUSEL: Botones manuales ---
+  function scrollCarousel(direction) {
+    const track = document.getElementById('carouselTrack');
+    const cardWidth = 296; 
+    track.scrollBy({ left: direction * cardWidth * 2, behavior: 'smooth' });
+    // Reinicia el temporizador al hacer clic manual
+    resetAutoplay();
+  }
+
+  // --- CARRUSEL: Avance automático ---
+  let autoplayInterval;
+  const track = document.getElementById('carouselTrack');
+  const wrapper = document.getElementById('carouselWrapper');
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      
+      // Si llegamos al final, regresamos al inicio
+      if (track.scrollLeft >= maxScroll - 0) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Avanza una tarjeta a la vez (280px + 16px de gap = 296px)
+        track.scrollBy({ left: 10, behavior: 'smooth' });
+      }
+    }, 100); // 3000 ms = 3 segundos
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Pausar cuando el mouse está encima (para poder hacer clic en los enlaces)
+  wrapper.addEventListener('mouseenter', stopAutoplay);
+  wrapper.addEventListener('mouseleave', startAutoplay);
+  
+  // Pausar en móviles cuando el usuario toca la pantalla
+  wrapper.addEventListener('touchstart', stopAutoplay);
+  wrapper.addEventListener('touchend', startAutoplay);
+
+  // Iniciar el autoplay al cargar la página
+  startAutoplay();
+
+  // --- ANIMACIONES DE ENTRADA ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.model-card, .stat, .dna-text').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
